@@ -49,7 +49,11 @@ static PyObject* fpng_encode_image_to_memory(PyObject *self, PyObject *args)
         Py_INCREF(Py_None);
         encoded = Py_None;
     }
-    return PyTuple_Pack(2, PyBool_FromLong(success), encoded);
+    PyObject* bool_obj = PyBool_FromLong(success);
+    PyObject* result = PyTuple_Pack(2, bool_obj, encoded);
+    Py_DECREF(bool_obj);
+    Py_DECREF(encoded);
+    return result;
 }
 
 static PyObject* fpng_encode_image_to_file(PyObject *self, PyObject *args)
