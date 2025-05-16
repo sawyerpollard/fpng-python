@@ -44,7 +44,7 @@ static PyObject* fpng_encode_image_to_memory(PyObject *self, PyObject *args)
         char* bytes = new char[out.size()];
         std::copy(out.begin(),out.end(),bytes);
         encoded = PyBytes_FromStringAndSize(bytes, out.size());
-
+        delete[] bytes;
     } else {
         Py_INCREF(Py_None);
         encoded = Py_None;
